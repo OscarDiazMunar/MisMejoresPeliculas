@@ -3,9 +3,9 @@ package com.oscar.mismejorespeliculas.presentation.view;
 import com.oscar.mismejorespeliculas.presentation.presenter.Presenter;
 
 /**
- * The interface Tab movies view.
+ * The interface Video dialog view.
  */
-public interface ITabMoviesView extends Presenter.PView {
+public interface IVideoDialogView extends Presenter.PView{
     /**
      * Show progress.
      */
@@ -15,4 +15,11 @@ public interface ITabMoviesView extends Presenter.PView {
      * Dismiss progress.
      */
     void dismissProgress();
+
+    /**
+     * Show video from youtube.
+     *
+     * @param keyMovie the key movie
+     */
+    void showVideoFromYoutube(String keyMovie);
 }

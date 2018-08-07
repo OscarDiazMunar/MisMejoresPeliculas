@@ -5,10 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.oscar.mismejorespeliculas.R;
 import com.oscar.mismejorespeliculas.di.listMoviesFragment.DaggerListMoviesComponent;
@@ -29,6 +30,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -41,18 +43,41 @@ import butterknife.Unbinder;
 public class ListMoviesFragment extends Fragment implements IListMoviesView, OnItemClickListener {
 
 
+    /**
+     * The Presenter.
+     */
     @Inject
     ListMoviesPresenter presenter;
 
+    /**
+     * The Recycler list movies.
+     */
     @BindView(R.id.RecyclerListMovies)
     RecyclerView recyclerListMovies;
+    /**
+     * The Unbinder.
+     */
     Unbinder unbinder;
 
+    /**
+     * The Movies list adapter.
+     */
     public MoviesListAdapter moviesListAdapter;
+    @BindView(R.id.btnback)
+    Button btnback;
+    @BindView(R.id.page)
+    TextView page;
+    @BindView(R.id.btnnext)
+    Button btnnext;
     private Context context;
     private List<Results> resultsListAux = new ArrayList<>();
     private int typeFragment;
+    private int pageCont = 1;
+    private int pageTotal;
 
+    /**
+     * Instantiates a new List movies fragment.
+     */
     public ListMoviesFragment() {
         // Required empty public constructor
     }
@@ -61,14 +86,13 @@ public class ListMoviesFragment extends Fragment implements IListMoviesView, OnI
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
+     * @param typeFragment the type fragment
      * @return A new instance of fragment ListMoviesFragment.
      */
-    // TODO: Rename and change types and number of parameters
+// TODO: Rename and change types and number of parameters
     public static ListMoviesFragment newInstance(int typeFragment) {
         ListMoviesFragment fragment = new ListMoviesFragment();
         Bundle args = new Bundle();
-        //args.putString(ARG_PARAM1, param1);
-        //args.putString(ARG_PARAM2, param2);
         args.putInt(Constants.ARGS.TYPE_FRAGMENT, typeFragment);
         fragment.setArguments(args);
         return fragment;
@@ -119,7 +143,8 @@ public class ListMoviesFragment extends Fragment implements IListMoviesView, OnI
     @Override
     public void onStart() {
         super.onStart();
-        switch (typeFragment){
+        selectTypeFragment(Integer.toString(pageCont));
+        /*switch (typeFragment) {
             case 0:
                 presenter.getListPopularMovies("1");
                 break;
@@ -130,11 +155,23 @@ public class ListMoviesFragment extends Fragment implements IListMoviesView, OnI
                 presenter.getListUpcomingMovies("1");
                 break;
 
-        }
-
-
+        }*/
     }
 
+    private void selectTypeFragment(String page){
+        switch (typeFragment) {
+            case 0:
+                presenter.getListPopularMovies(page);
+                break;
+            case 1:
+                presenter.getListTopratedMovies(page);
+                break;
+            case 2:
+                presenter.getListUpcomingMovies(page);
+                break;
+
+        }
+    }
     @Override
     public void showProgress() {
 
@@ -147,16 +184,16 @@ public class ListMoviesFragment extends Fragment implements IListMoviesView, OnI
 
     @Override
     public void setDataResults(ResponseMovies responseMovies) {
+        resultsListAux.clear();
         List<Results> resultsList = responseMovies.getResults();
-        Log.e("HOLA", "LISTA");
-        for (Results item: resultsList ) {
-            Log.e("ITEM", item.toString());
+        for (Results item : resultsList) {
             resultsListAux.add(item);
         }
         moviesListAdapter.notifyDataSetChanged();
-
+        pageTotal = Integer.parseInt(responseMovies.getTotal_pages());
+        String pager = Integer.toString(pageCont) + " de " + responseMovies.getTotal_pages();
+        page.setText(pager);
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -165,6 +202,25 @@ public class ListMoviesFragment extends Fragment implements IListMoviesView, OnI
 
     @Override
     public void onItemClick(Results results) {
+        VideoDialogFragment videoDialogFragment = VideoDialogFragment.newInstance(results.getId());
+        videoDialogFragment.show(getFragmentManager(), "hola");
+    }
 
+    @OnClick({R.id.btnback, R.id.btnnext})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btnback:
+                if (pageCont != 1){
+                    pageCont--;
+                    selectTypeFragment(Integer.toString(pageCont));
+                }
+                break;
+            case R.id.btnnext:
+                if (pageCont < pageTotal){
+                    pageCont++;
+                    selectTypeFragment(Integer.toString(pageCont));
+                }
+                break;
+        }
     }
 }

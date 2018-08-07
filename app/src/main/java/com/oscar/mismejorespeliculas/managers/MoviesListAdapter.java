@@ -19,12 +19,22 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * The type Movies list adapter.
+ */
 public class MoviesListAdapter extends RecyclerView.Adapter<MoviesListAdapter.ViewHolder> {
 
     private Context context;
     private List<Results> resultsList;
     private OnItemClickListener onItemClickListener;
 
+    /**
+     * Instantiates a new Movies list adapter.
+     *
+     * @param resultsList         the results list
+     * @param context             the context
+     * @param onItemClickListener the on item click listener
+     */
     public MoviesListAdapter(List<Results> resultsList, Context context, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.resultsList = resultsList;
@@ -54,27 +64,59 @@ public class MoviesListAdapter extends RecyclerView.Adapter<MoviesListAdapter.Vi
         return resultsList.size();
     }
 
+    /**
+     * The type View holder.
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        /**
+         * The Txt title movie.
+         */
         @BindView(R.id.txt_title_movie)
         TextView txtTitleMovie;
+        /**
+         * The Img poster.
+         */
         @BindView(R.id.img_poster)
         ImageView imgPoster;
+        /**
+         * The Txt overview movie.
+         */
         @BindView(R.id.txt_overview_movie)
         TextView txtOverviewMovie;
+        /**
+         * The Txt release.
+         */
         @BindView(R.id.txt_release)
         TextView txtRelease;
+        /**
+         * The Txt score.
+         */
         @BindView(R.id.txt_score)
         TextView txtScore;
 
+        /**
+         * The View.
+         */
         View view;
 
+        /**
+         * Instantiates a new View holder.
+         *
+         * @param itemView the item view
+         */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.view = itemView;
             ButterKnife.bind(this, itemView);
         }
 
+        /**
+         * Set click listener.
+         *
+         * @param results the results
+         * @param listner the listner
+         */
         public void setClickListener(final Results results, final OnItemClickListener listner){
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

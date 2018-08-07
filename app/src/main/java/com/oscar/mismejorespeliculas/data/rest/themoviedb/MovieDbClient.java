@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.oscar.mismejorespeliculas.data.repositories.RepositoryListMovies;
 import com.oscar.mismejorespeliculas.domain.model.ResponseMovies;
+import com.oscar.mismejorespeliculas.domain.model.Videos;
 import com.oscar.mismejorespeliculas.utils.Constants;
 
 import java.security.KeyManagementException;
@@ -25,6 +26,9 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * The type Movie db client.
+ */
 public class MovieDbClient implements RepositoryListMovies {
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
@@ -47,6 +51,11 @@ public class MovieDbClient implements RepositoryListMovies {
         service = retrofit.create(MovieDbService.class);
     }
 
+    /**
+     * Get instance movie db client.
+     *
+     * @return the movie db client
+     */
     public static MovieDbClient getInstance(){
         if (instance == null){
             instance = new MovieDbClient();
@@ -113,5 +122,10 @@ public class MovieDbClient implements RepositoryListMovies {
     @Override
     public Observable<ResponseMovies> getListUpcomingMovie(String page) {
         return service.getListUpcomingMovies(Constants.KEYS.API_KEY, Constants.LANGUAGE.ENGLISH, page);
+    }
+
+    @Override
+    public Observable<Videos> getVideos(String idMovie) {
+        return service.getVideos(idMovie,Constants.KEYS.API_KEY, Constants.LANGUAGE.ENGLISH);
     }
 }

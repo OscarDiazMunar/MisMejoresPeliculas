@@ -9,10 +9,19 @@ import com.oscar.mismejorespeliculas.presentation.presenter.Presenter;
 import com.oscar.mismejorespeliculas.presentation.ui.ListMoviesFragment;
 import com.oscar.mismejorespeliculas.presentation.view.IListMoviesView;
 
+/**
+ * The type List movies presenter.
+ */
 public class ListMoviesPresenter extends Presenter<IListMoviesView> implements IListMoviesPresenter {
     private ListMoviesFragment listMoviesFragment;
     private GetListMovies getListMovies;
 
+    /**
+     * Instantiates a new List movies presenter.
+     *
+     * @param listMoviesFragment the list movies fragment
+     * @param getListMovies      the get list movies
+     */
     public ListMoviesPresenter(ListMoviesFragment listMoviesFragment, GetListMovies getListMovies) {
         this.listMoviesFragment = listMoviesFragment;
         this.getListMovies = getListMovies;
@@ -39,6 +48,9 @@ public class ListMoviesPresenter extends Presenter<IListMoviesView> implements I
     }
 
     private class GetRequestPopularObserver extends UseCaseObserver<ResponseMovies>{
+        /**
+         * The Response movies.
+         */
         ResponseMovies responseMovies;
         @Override
         public void onNext(ResponseMovies value) {

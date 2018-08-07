@@ -33,4 +33,9 @@ public class GetListMovies extends UseCaseListMovies {
     Observable buildUseCaseUpcomingMoviesObservable(String page) {
         return repositoryListMovies.getListUpcomingMovie(page);
     }
+
+    @Override
+    Observable buildUseCaseGetVideoObservable(String idMovie) {
+        return repositoryListMovies.getVideos(idMovie);
+    }
 }

@@ -1,9 +1,11 @@
 package com.oscar.mismejorespeliculas.data.rest.themoviedb;
 
 import com.oscar.mismejorespeliculas.domain.model.ResponseMovies;
+import com.oscar.mismejorespeliculas.domain.model.Videos;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -48,4 +50,17 @@ public interface MovieDbService {
     Observable<ResponseMovies> getListUpcomingMovies(@Query("api_key") String apiKey,
                                                         @Query("language") String language,
                                                         @Query("page") String page);
+
+    /**
+     * Gets videos.
+     *
+     * @param idMovie  the id movie
+     * @param apiKey   the api key
+     * @param language the language
+     * @return the videos
+     */
+    @GET("{id_movie}/videos")
+    Observable<Videos> getVideos(@Path("id_movie") String idMovie,
+                                 @Query("api_key") String apiKey,
+                                 @Query("language") String language);
 }

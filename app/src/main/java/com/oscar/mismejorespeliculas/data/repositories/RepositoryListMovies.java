@@ -1,6 +1,7 @@
 package com.oscar.mismejorespeliculas.data.repositories;
 
 import com.oscar.mismejorespeliculas.domain.model.ResponseMovies;
+import com.oscar.mismejorespeliculas.domain.model.Videos;
 
 import io.reactivex.Observable;
 
@@ -31,4 +32,12 @@ public interface RepositoryListMovies {
      * @return the list upcoming movie
      */
     Observable<ResponseMovies> getListUpcomingMovie(String page);
+
+    /**
+     * Gets videos.
+     *
+     * @param idMovie the id movie
+     * @return the videos
+     */
+    Observable<Videos> getVideos(String idMovie);
 }

@@ -67,6 +67,21 @@ abstract class UseCaseListMovies<T> {
     }
 
     /**
+     * Execute get video.
+     *
+     * @param disposableObserver the disposable observer
+     * @param idMovie            the id movie
+     */
+    public void executeGetVideo(DisposableObserver<T> disposableObserver, String idMovie){
+        final Observable<T> observable = this.buildUseCaseGetVideoObservable(idMovie)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+
+        DisposableObserver observer = observable.subscribeWith(disposableObserver);
+        compositeDisposable.add(observer);
+    }
+
+    /**
      * Dispose.
      */
     public void dispose(){
@@ -98,5 +113,13 @@ abstract class UseCaseListMovies<T> {
      * @return the observable
      */
     abstract Observable<T> buildUseCaseUpcomingMoviesObservable(String page);
+
+    /**
+     * Build use case get video observable observable.
+     *
+     * @param idMovie the id movie
+     * @return the observable
+     */
+    abstract Observable<T> buildUseCaseGetVideoObservable(String idMovie);
 
 }
