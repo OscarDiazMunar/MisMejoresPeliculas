@@ -6,4 +6,6 @@ public interface IListMoviesPresenter {
      */
     void onCreate();
     void getListPopularMovies(String page);
+    void getListTopratedMovies(String page);
+    void getListUpcomingMovies(String page);
 }

@@ -28,23 +28,38 @@ public class ListMoviesPresenter extends Presenter<IListMoviesView> implements I
         getListMovies.executeGetPopularMovies(new GetRequestPopularObserver(),page);
     }
 
+    @Override
+    public void getListTopratedMovies(String page) {
+        getListMovies.executeGetTopRatedMovies(new GetRequestPopularObserver(),page);
+    }
+
+    @Override
+    public void getListUpcomingMovies(String page) {
+        getListMovies.executeGetUpcomingMovies(new GetRequestPopularObserver(),page);
+    }
+
     private class GetRequestPopularObserver extends UseCaseObserver<ResponseMovies>{
+        ResponseMovies responseMovies;
         @Override
         public void onNext(ResponseMovies value) {
             super.onNext(value);
             Log.e("PERRO", value.toString());
+            responseMovies = value;
         }
 
         @Override
         public void onError(Throwable e) {
             super.onError(e);
-            Log.e("ERROR", "GOSQUE");
-            Log.e("GORSO", e.toString());
+
         }
 
         @Override
         public void onComplete() {
             super.onComplete();
+            if (responseMovies != null){
+                getView().setDataResults(responseMovies);
+            }
+
         }
     }
 }
