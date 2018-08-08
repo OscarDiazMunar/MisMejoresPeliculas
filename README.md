@@ -6,6 +6,7 @@ Esta aqrquitectura tiene 3 capas:
 Capa Presentation: Implementa el patron MVP
 Capa Domain: La capa de negocio. 
 Capa Data: se obtienen los datos de una fuente de datos bien sea una database sqlite o un servicio rest, etc. se usa el patron repository.
+Para ver el trailer se debe dar click encima de la tarjeta de cada pelicula.
 
 librerias
 Se usa rxjava para obtner datos asincronicamente y en segundo plano y ai no bloquear la app.
