@@ -1,7 +1,11 @@
 package com.oscar.mismejorespeliculas.di.listMoviesFragment;
 
+import android.content.Context;
+
+import com.oscar.mismejorespeliculas.data.db.DBHandler;
 import com.oscar.mismejorespeliculas.data.rest.themoviedb.MovieDbClient;
 import com.oscar.mismejorespeliculas.domain.usecase.listMovies.GetListMovies;
+import com.oscar.mismejorespeliculas.domain.usecase.listMoviesDB.SelectListMoviesDB;
 import com.oscar.mismejorespeliculas.presentation.presenter.listMoviesPresenter.ListMoviesPresenter;
 import com.oscar.mismejorespeliculas.presentation.ui.ListMoviesFragment;
 
@@ -13,6 +17,26 @@ import dagger.Provides;
  */
 @Module
 public class ListMoviesModule {
+    private final Context context;
+
+    /**
+     * Instantiates a new List movies module.
+     *
+     * @param context the context
+     */
+    public ListMoviesModule(Context context) {
+        this.context = context;
+    }
+
+    /**
+     * Get context context.
+     *
+     * @return the context
+     */
+    @Provides
+    public Context getContext(){
+        return context;
+    }
 
     /**
      * Provides list movies fragment list movies fragment.
@@ -35,14 +59,27 @@ public class ListMoviesModule {
     }
 
     /**
+     * Provides select list movies db select list movies db.
+     *
+     * @return the select list movies db
+     */
+    @Provides
+    public SelectListMoviesDB providesSelectListMoviesDB(){
+        return new SelectListMoviesDB(new DBHandler(context));
+    }
+
+    /**
      * Provides list movies presenter list movies presenter.
      *
      * @param listMoviesFragment the list movies fragment
      * @param getListMovies      the get list movies
+     * @param selectListMoviesDB the select list movies db
      * @return the list movies presenter
      */
     @Provides
-    public ListMoviesPresenter providesListMoviesPresenter(ListMoviesFragment listMoviesFragment, GetListMovies getListMovies){
-        return new ListMoviesPresenter(listMoviesFragment, getListMovies);
+    public ListMoviesPresenter providesListMoviesPresenter(ListMoviesFragment listMoviesFragment,
+                                                           GetListMovies getListMovies,
+                                                           SelectListMoviesDB selectListMoviesDB){
+        return new ListMoviesPresenter(listMoviesFragment, getListMovies, context, selectListMoviesDB);
     }
 }

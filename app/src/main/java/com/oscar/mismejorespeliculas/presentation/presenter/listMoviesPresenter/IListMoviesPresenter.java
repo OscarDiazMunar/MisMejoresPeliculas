@@ -29,4 +29,18 @@ public interface IListMoviesPresenter {
      * @param page the page
      */
     void getListUpcomingMovies(String page);
+
+    /**
+     * Sets tye movies.
+     *
+     * @param tyeMovies the tye movies
+     */
+    void setTyeMovies(String tyeMovies);
+
+    /**
+     * Sets page now.
+     *
+     * @param pageNow the page now
+     */
+    void setPageNow(String pageNow);
 }

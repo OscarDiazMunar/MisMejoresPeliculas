@@ -1,5 +1,7 @@
 package com.oscar.mismejorespeliculas.domain.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -7,13 +9,55 @@ import java.util.List;
  * The type Response movies.
  */
 public class ResponseMovies implements Serializable {
+    @SerializedName("results")
     private List<Results> results;
 
+    @SerializedName("page")
     private String page;
 
+    @SerializedName("total_pages")
     private String total_pages;
 
+    @SerializedName("total_results")
     private String total_results;
+
+    /**
+     * The constant TABLE.
+     */
+    public static final String TABLE = "pageMoviesDB";
+    /**
+     * The constant KEY_ID.
+     */
+    public static final String KEY_ID = "id";
+    /**
+     * The constant KEY_PAGE.
+     */
+    public static final String KEY_PAGE = "page";
+    /**
+     * The constant KEY_TOTAL_PAGE.
+     */
+    public static final String KEY_TOTAL_PAGE = "totalpage";
+    /**
+     * The constant KEY_TYPEMOVIE.
+     */
+    public static final String KEY_TYPEMOVIE = "typeMovie";
+
+    /**
+     * Instantiates a new Response movies.
+     *
+     * @param page        the page
+     * @param total_pages the total pages
+     */
+    public ResponseMovies(String page, String total_pages) {
+        this.page = page;
+        this.total_pages = total_pages;
+    }
+
+    /**
+     * Instantiates a new Response movies.
+     */
+    public ResponseMovies() {
+    }
 
     /**
      * Gets results.

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.oscar.mismejorespeliculas.R;
 import com.oscar.mismejorespeliculas.di.listMoviesFragment.DaggerListMoviesComponent;
@@ -63,10 +64,19 @@ public class ListMoviesFragment extends Fragment implements IListMoviesView, OnI
      * The Movies list adapter.
      */
     public MoviesListAdapter moviesListAdapter;
+    /**
+     * The Btnback.
+     */
     @BindView(R.id.btnback)
     Button btnback;
+    /**
+     * The Page.
+     */
     @BindView(R.id.page)
     TextView page;
+    /**
+     * The Btnnext.
+     */
     @BindView(R.id.btnnext)
     Button btnnext;
     private Context context;
@@ -104,6 +114,8 @@ public class ListMoviesFragment extends Fragment implements IListMoviesView, OnI
         if (getArguments() != null) {
             typeFragment = getArguments().getInt(Constants.ARGS.TYPE_FRAGMENT);
         }
+        presenter.onCreate();
+        presenter.setTyeMovies(Integer.toString(typeFragment));
     }
 
     @Override
@@ -130,7 +142,7 @@ public class ListMoviesFragment extends Fragment implements IListMoviesView, OnI
 
     private void initializeDagger() {
         ListMoviesComponent listMoviesComponent = DaggerListMoviesComponent.builder()
-                .listMoviesModule(new ListMoviesModule()).build();
+                .listMoviesModule(new ListMoviesModule(getContext())).build();
         listMoviesComponent.inject(this);
     }
 
@@ -143,19 +155,8 @@ public class ListMoviesFragment extends Fragment implements IListMoviesView, OnI
     @Override
     public void onStart() {
         super.onStart();
+        presenter.setPageNow(Integer.toString(pageCont));
         selectTypeFragment(Integer.toString(pageCont));
-        /*switch (typeFragment) {
-            case 0:
-                presenter.getListPopularMovies("1");
-                break;
-            case 1:
-                presenter.getListTopratedMovies("1");
-                break;
-            case 2:
-                presenter.getListUpcomingMovies("1");
-                break;
-
-        }*/
     }
 
     private void selectTypeFragment(String page){
@@ -194,6 +195,12 @@ public class ListMoviesFragment extends Fragment implements IListMoviesView, OnI
         String pager = Integer.toString(pageCont) + " de " + responseMovies.getTotal_pages();
         page.setText(pager);
     }
+
+    @Override
+    public void showErrorNoConnection(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -206,6 +213,11 @@ public class ListMoviesFragment extends Fragment implements IListMoviesView, OnI
         videoDialogFragment.show(getFragmentManager(), "hola");
     }
 
+    /**
+     * On view clicked.
+     *
+     * @param view the view
+     */
     @OnClick({R.id.btnback, R.id.btnnext})
     public void onViewClicked(View view) {
         switch (view.getId()) {

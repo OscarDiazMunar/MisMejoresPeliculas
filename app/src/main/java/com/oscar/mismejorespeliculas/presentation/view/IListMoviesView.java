@@ -26,4 +26,11 @@ public interface IListMoviesView extends Presenter.PView {
      * @param responseMovies the response movies
      */
     void setDataResults(ResponseMovies responseMovies);
+
+    /**
+     * Show error no connection.
+     *
+     * @param message the message
+     */
+    void showErrorNoConnection(String message);
 }

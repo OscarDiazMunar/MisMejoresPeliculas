@@ -55,4 +55,18 @@ public class Constants {
          */
         String ID_MOVIE = " idMovie";
     }
+
+    /**
+     * The interface Data base.
+     */
+    public interface DATA_BASE{
+        /**
+         * The constant version.
+         */
+        int version = 1;
+        /**
+         * The constant name.
+         */
+        String name = "movies_user.sqlite";
+    }
 }
