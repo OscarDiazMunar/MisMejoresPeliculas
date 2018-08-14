@@ -1,5 +1,5 @@
 # MisMejoresPeliculas
-Clean architecture, MVP, Dagger 2, Retrofit 2, Rxjava, The movie db API
+Clean architecture, MVP, Dagger 2, Retrofit 2, Rxjava, GreenDAO ORM, The movie db API
 
 La aplicacion esta construida siguiendo clean architecture.
 Esta aqrquitectura tiene 3 capas:
@@ -14,7 +14,8 @@ Se usa dagger 2 para injeccion de dependencias.
 Se usa retrofit para consumo de servicios rest.
 Se usa butterknife para injection de vistas.
 Se usa Glide para cargar imagenes desde una url.
-Se uso GSon para serializar y deserializar formato json. 
+Se uso GSon para serializar y deserializar formato json.
+Se uso ORM greenDAO para persistencia de datos
 
 Principio de responsabilidad única: Una clase debe hacer una sola funcion y todo sus metodos deben estar enfocados a cumplir con esa unica funcion.
 Caracteristicas clean code
