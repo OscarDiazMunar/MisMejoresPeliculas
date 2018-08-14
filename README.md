@@ -1,4 +1,8 @@
 # MisMejoresPeliculas
+Hay dos ramas:
+master no usa ORM.
+orm implementa ORM.
+
 Clean architecture, MVP, Dagger 2, Retrofit 2, Rxjava, The movie db API
 
 La aplicacion esta construida siguiendo clean architecture.
