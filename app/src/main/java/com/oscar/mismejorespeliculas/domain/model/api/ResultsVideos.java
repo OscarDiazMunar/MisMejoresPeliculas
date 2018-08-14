@@ -1,4 +1,4 @@
-package com.oscar.mismejorespeliculas.domain.model;
+package com.oscar.mismejorespeliculas.domain.model.api;
 
 import com.google.gson.annotations.SerializedName;
 

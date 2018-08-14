@@ -16,8 +16,8 @@ import com.oscar.mismejorespeliculas.R;
 import com.oscar.mismejorespeliculas.di.listMoviesFragment.DaggerListMoviesComponent;
 import com.oscar.mismejorespeliculas.di.listMoviesFragment.ListMoviesComponent;
 import com.oscar.mismejorespeliculas.di.listMoviesFragment.ListMoviesModule;
-import com.oscar.mismejorespeliculas.domain.model.ResponseMovies;
-import com.oscar.mismejorespeliculas.domain.model.Results;
+import com.oscar.mismejorespeliculas.domain.model.api.ResponseMovies;
+import com.oscar.mismejorespeliculas.domain.model.api.Results;
 import com.oscar.mismejorespeliculas.managers.MoviesListAdapter;
 import com.oscar.mismejorespeliculas.managers.OnItemClickListener;
 import com.oscar.mismejorespeliculas.presentation.presenter.listMoviesPresenter.ListMoviesPresenter;
@@ -142,7 +142,7 @@ public class ListMoviesFragment extends Fragment implements IListMoviesView, OnI
 
     private void initializeDagger() {
         ListMoviesComponent listMoviesComponent = DaggerListMoviesComponent.builder()
-                .listMoviesModule(new ListMoviesModule(getContext())).build();
+                .listMoviesModule(new ListMoviesModule(getContext(), getActivity())).build();
         listMoviesComponent.inject(this);
     }
 

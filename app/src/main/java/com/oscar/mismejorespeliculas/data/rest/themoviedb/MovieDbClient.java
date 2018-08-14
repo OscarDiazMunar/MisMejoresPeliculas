@@ -5,8 +5,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.oscar.mismejorespeliculas.data.repositories.RepositoryListMovies;
-import com.oscar.mismejorespeliculas.domain.model.ResponseMovies;
-import com.oscar.mismejorespeliculas.domain.model.Videos;
+import com.oscar.mismejorespeliculas.domain.model.api.ResponseMovies;
+import com.oscar.mismejorespeliculas.domain.model.api.Videos;
 import com.oscar.mismejorespeliculas.utils.Constants;
 
 import java.security.KeyManagementException;

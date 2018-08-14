@@ -1,10 +1,7 @@
 package com.oscar.mismejorespeliculas.presentation.view;
 
-import com.oscar.mismejorespeliculas.domain.model.ResponseMovies;
-import com.oscar.mismejorespeliculas.domain.model.Results;
+import com.oscar.mismejorespeliculas.domain.model.api.ResponseMovies;
 import com.oscar.mismejorespeliculas.presentation.presenter.Presenter;
-
-import java.util.List;
 
 /**
  * The interface List movies view.

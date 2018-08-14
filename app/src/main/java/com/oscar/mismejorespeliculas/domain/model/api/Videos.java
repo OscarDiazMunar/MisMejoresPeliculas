@@ -1,6 +1,7 @@
-package com.oscar.mismejorespeliculas.domain.model;
+package com.oscar.mismejorespeliculas.domain.model.api;
 
 import com.google.gson.annotations.SerializedName;
+import com.oscar.mismejorespeliculas.domain.model.api.ResultsVideos;
 
 import java.io.Serializable;
 import java.util.List;

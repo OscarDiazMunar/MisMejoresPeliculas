@@ -1,6 +1,6 @@
 package com.oscar.mismejorespeliculas.managers;
 
-import com.oscar.mismejorespeliculas.domain.model.Results;
+import com.oscar.mismejorespeliculas.domain.model.api.Results;
 
 /**
  * The interface On item click listener.

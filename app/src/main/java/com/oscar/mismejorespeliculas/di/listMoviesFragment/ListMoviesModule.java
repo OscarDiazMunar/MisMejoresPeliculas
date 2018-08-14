@@ -1,8 +1,9 @@
 package com.oscar.mismejorespeliculas.di.listMoviesFragment;
 
+import android.app.Activity;
 import android.content.Context;
 
-import com.oscar.mismejorespeliculas.data.db.DBHandler;
+import com.oscar.mismejorespeliculas.data.db.DBHandlerDAO;
 import com.oscar.mismejorespeliculas.data.rest.themoviedb.MovieDbClient;
 import com.oscar.mismejorespeliculas.domain.usecase.listMovies.GetListMovies;
 import com.oscar.mismejorespeliculas.domain.usecase.listMoviesDB.SelectListMoviesDB;
@@ -18,14 +19,17 @@ import dagger.Provides;
 @Module
 public class ListMoviesModule {
     private final Context context;
+    private final Activity activity;
 
     /**
      * Instantiates a new List movies module.
      *
      * @param context the context
+     * @param activity
      */
-    public ListMoviesModule(Context context) {
+    public ListMoviesModule(Context context, Activity activity) {
         this.context = context;
+        this.activity = activity;
     }
 
     /**
@@ -65,7 +69,7 @@ public class ListMoviesModule {
      */
     @Provides
     public SelectListMoviesDB providesSelectListMoviesDB(){
-        return new SelectListMoviesDB(new DBHandler(context));
+        return new SelectListMoviesDB(DBHandlerDAO.getInstance(context));
     }
 
     /**

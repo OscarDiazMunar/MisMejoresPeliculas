@@ -1,7 +1,7 @@
 package com.oscar.mismejorespeliculas.data.repositories;
 
-import com.oscar.mismejorespeliculas.domain.model.ResponseMovies;
-import com.oscar.mismejorespeliculas.domain.model.Videos;
+import com.oscar.mismejorespeliculas.domain.model.api.ResponseMovies;
+import com.oscar.mismejorespeliculas.domain.model.api.Videos;
 
 import io.reactivex.Observable;
 

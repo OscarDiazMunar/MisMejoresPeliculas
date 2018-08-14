@@ -21,6 +21,6 @@ public class SelectListMoviesDB extends UseCaseListMoviesDB{
 
     @Override
     Observable buildUseCaseMoviesDBObservable(String page, String typeMovies) {
-        return repositoryDB.selectAllMoviesPage(page, typeMovies);
+        return repositoryDB.selectAllMoviesPageA(page, typeMovies);
     }
 }

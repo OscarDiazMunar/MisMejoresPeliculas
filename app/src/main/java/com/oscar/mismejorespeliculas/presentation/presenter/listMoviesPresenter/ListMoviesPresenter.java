@@ -1,17 +1,25 @@
 package com.oscar.mismejorespeliculas.presentation.presenter.listMoviesPresenter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
-import com.oscar.mismejorespeliculas.data.db.DBHandler;
-import com.oscar.mismejorespeliculas.domain.model.ResponseMovies;
+import com.oscar.mismejorespeliculas.data.db.DBHandlerDAO;
+import com.oscar.mismejorespeliculas.domain.model.api.ResponseMovies;
+import com.oscar.mismejorespeliculas.domain.model.api.Results;
+import com.oscar.mismejorespeliculas.domain.model.db.ResponseDataMovies;
+import com.oscar.mismejorespeliculas.domain.model.db.ResponseMoviesDB;
+import com.oscar.mismejorespeliculas.domain.model.db.ResultsDB;
 import com.oscar.mismejorespeliculas.domain.usecase.UseCaseObserver;
 import com.oscar.mismejorespeliculas.domain.usecase.listMovies.GetListMovies;
 import com.oscar.mismejorespeliculas.domain.usecase.listMoviesDB.SelectListMoviesDB;
 import com.oscar.mismejorespeliculas.presentation.presenter.Presenter;
 import com.oscar.mismejorespeliculas.presentation.ui.ListMoviesFragment;
 import com.oscar.mismejorespeliculas.presentation.view.IListMoviesView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The type List movies presenter.
@@ -20,10 +28,10 @@ public class ListMoviesPresenter extends Presenter<IListMoviesView> implements I
     private ListMoviesFragment listMoviesFragment;
     private GetListMovies getListMovies;
     private SelectListMoviesDB selectListMoviesDB;
-    private DBHandler dbHandler;
     private String typeMovies;
     private String pageNow;
     private Context context;
+    private DBHandlerDAO dbHandlerDAO;
 
     /**
      * Instantiates a new List movies presenter.
@@ -45,7 +53,7 @@ public class ListMoviesPresenter extends Presenter<IListMoviesView> implements I
 
     @Override
     public void onCreate() {
-        dbHandler = new DBHandler(context);
+        dbHandlerDAO = DBHandlerDAO.getInstance(context);
     }
 
     @Override
@@ -102,21 +110,57 @@ public class ListMoviesPresenter extends Presenter<IListMoviesView> implements I
             if (responseMovies != null){
                 getView().setDataResults(responseMovies);
 
-                Long res = dbHandler.insertDataMovies(responseMovies, typeMovies);
-                Log.e("RES", Long.toString(res));
+                ResponseMoviesDB responseMoviesDB = new ResponseMoviesDB();
+                responseMoviesDB.setPage(responseMovies.getPage());
+                responseMoviesDB.setTotal_pages(responseMovies.getTotal_pages());
+                responseMoviesDB.setTypeMovie(typeMovies);
+
+                Long res1 = dbHandlerDAO.insertResponseMovies(responseMoviesDB);
+
+                for (Results item : responseMovies.getResults()) {
+                    ResultsDB resultsDB = new ResultsDB();
+                    resultsDB.setDate(item.getRelease_date());
+                    resultsDB.setIdMovie(item.getId());
+                    resultsDB.setOverview(item.getOverview());
+                    resultsDB.setOriginalTitle(item.getOriginal_title());
+                    resultsDB.setVote(item.getVote_average());
+                    resultsDB.setPosterPath(item.getPoster_path());
+                    resultsDB.setPage(responseMovies.getPage());
+                    resultsDB.setTypeMovie(typeMovies);
+                    Long resto = dbHandlerDAO.insertResults(resultsDB);
+                    Log.e("RESTO", Long.toString(resto));
+                }
+
+                Log.e("RES", Long.toString(res1));
             }
         }
     }
 
-    private class SelectMoviesObserver extends UseCaseObserver<ResponseMovies>{
+    private class SelectMoviesObserver extends UseCaseObserver<ResponseDataMovies>{
         /**
          * The Response movies.
          */
-        ResponseMovies responseMovies;
+        ResponseMovies responseMovies = new ResponseMovies();
         @Override
-        public void onNext(ResponseMovies value) {
+        public void onNext(ResponseDataMovies value) {
             super.onNext(value);
-            responseMovies = value;
+            responseMovies.setPage(value.getResponseMoviesDB().getPage());
+            responseMovies.setTotal_pages(value.getResponseMoviesDB().getTotal_pages());
+
+
+            List<Results> resultsList = new ArrayList<>();
+            for (ResultsDB item : value.getResultsDBS()) {
+                Results results = new Results(item.getVote(),
+                        item.getOverview(),
+                        item.getDate(),
+                        item.getOriginalTitle(),
+                        item.getPosterPath(),
+                        item.getIdMovie());
+                resultsList.add(results);
+            }
+
+            responseMovies.setResults(resultsList);
+
         }
 
         @Override

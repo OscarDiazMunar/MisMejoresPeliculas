@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.oscar.mismejorespeliculas.R;
-import com.oscar.mismejorespeliculas.domain.model.Results;
+import com.oscar.mismejorespeliculas.domain.model.api.Results;
 import com.oscar.mismejorespeliculas.utils.Constants;
 
 import java.util.List;

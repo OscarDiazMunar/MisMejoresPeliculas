@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.oscar.mismejorespeliculas.App;
 import com.oscar.mismejorespeliculas.R;
 import com.oscar.mismejorespeliculas.di.tabMoviesActivity.DaggerTabMoviesComponent;
 import com.oscar.mismejorespeliculas.di.tabMoviesActivity.TabMoviesComponent;
@@ -121,7 +122,6 @@ public class TabMoviesActivity extends AppCompatActivity implements ITabMoviesVi
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position){
                 case 0:
-
                     return ListMoviesFragment.newInstance(0);
                 case 1:
                     return ListMoviesFragment.newInstance(1);

@@ -1,4 +1,4 @@
-package com.oscar.mismejorespeliculas.domain.model;
+package com.oscar.mismejorespeliculas.domain.model.api;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -20,27 +20,6 @@ public class ResponseMovies implements Serializable {
 
     @SerializedName("total_results")
     private String total_results;
-
-    /**
-     * The constant TABLE.
-     */
-    public static final String TABLE = "pageMoviesDB";
-    /**
-     * The constant KEY_ID.
-     */
-    public static final String KEY_ID = "id";
-    /**
-     * The constant KEY_PAGE.
-     */
-    public static final String KEY_PAGE = "page";
-    /**
-     * The constant KEY_TOTAL_PAGE.
-     */
-    public static final String KEY_TOTAL_PAGE = "totalpage";
-    /**
-     * The constant KEY_TYPEMOVIE.
-     */
-    public static final String KEY_TYPEMOVIE = "typeMovie";
 
     /**
      * Instantiates a new Response movies.

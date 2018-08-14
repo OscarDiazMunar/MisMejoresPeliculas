@@ -1,7 +1,7 @@
 package com.oscar.mismejorespeliculas.data.rest.themoviedb;
 
-import com.oscar.mismejorespeliculas.domain.model.ResponseMovies;
-import com.oscar.mismejorespeliculas.domain.model.Videos;
+import com.oscar.mismejorespeliculas.domain.model.api.ResponseMovies;
+import com.oscar.mismejorespeliculas.domain.model.api.Videos;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

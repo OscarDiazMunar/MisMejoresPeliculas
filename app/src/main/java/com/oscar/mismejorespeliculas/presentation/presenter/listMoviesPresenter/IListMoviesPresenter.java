@@ -1,5 +1,7 @@
 package com.oscar.mismejorespeliculas.presentation.presenter.listMoviesPresenter;
 
+import android.app.Activity;
+
 /**
  * The interface List movies presenter.
  */
@@ -43,4 +45,5 @@ public interface IListMoviesPresenter {
      * @param pageNow the page now
      */
     void setPageNow(String pageNow);
+
 }

@@ -1,4 +1,4 @@
-package com.oscar.mismejorespeliculas.domain.model;
+package com.oscar.mismejorespeliculas.domain.model.api;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -28,47 +28,6 @@ public class Results implements Serializable {
 
     @SerializedName("poster_path")
     private String poster_path;
-
-    /**
-     * The constant TABLE.
-     */
-    public static final String TABLE = "resultsMoviesDB";
-    /**
-     * The constant KEY_ID.
-     */
-    public static final String KEY_ID = "id";
-    /**
-     * The constant KEY_VOTE.
-     */
-    public static final String KEY_VOTE = "vote";
-    /**
-     * The constant KEY_ID_MOVIE.
-     */
-    public static final String KEY_ID_MOVIE = "idmovie";
-    /**
-     * The constant KEY_OVERVIEW.
-     */
-    public static final String KEY_OVERVIEW = "overview";
-    /**
-     * The constant KEY_DATE.
-     */
-    public static final String KEY_DATE = "date";
-    /**
-     * The constant KEY_TITLE.
-     */
-    public static final String KEY_TITLE = "title";
-    /**
-     * The constant KEY_POSTER.
-     */
-    public static final String KEY_POSTER = "poster";
-    /**
-     * The constant KEY_PAGE.
-     */
-    public static final String KEY_PAGE = "page";
-    /**
-     * The constant KEY_TYPEMOVIE.
-     */
-    public static final String KEY_TYPEMOVIE = "typeMovie";
 
     /**
      * Instantiates a new Results.

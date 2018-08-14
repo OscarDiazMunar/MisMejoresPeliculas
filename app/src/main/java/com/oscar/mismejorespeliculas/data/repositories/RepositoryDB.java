@@ -1,6 +1,8 @@
 package com.oscar.mismejorespeliculas.data.repositories;
 
-import com.oscar.mismejorespeliculas.domain.model.ResponseMovies;
+import com.oscar.mismejorespeliculas.domain.model.db.ResponseDataMovies;
+import com.oscar.mismejorespeliculas.domain.model.db.ResponseMoviesDB;
+import com.oscar.mismejorespeliculas.domain.model.db.ResultsDB;
 
 import io.reactivex.Observable;
 
@@ -10,20 +12,27 @@ import io.reactivex.Observable;
  */
 public interface RepositoryDB {
     /**
-     * Select all movies page observable.
+     * Insert response movies long.
+     *
+     * @param responseMoviesDB the response movies db
+     * @return the long
+     */
+    Long insertResponseMovies(ResponseMoviesDB responseMoviesDB);
+
+    /**
+     * Insert results long.
+     *
+     * @param resultsDB the results db
+     * @return the long
+     */
+    Long insertResults(ResultsDB resultsDB);
+
+    /**
+     * Select all movies page a observable.
      *
      * @param page      the page
      * @param typeMovie the type movie
      * @return the observable
      */
-    Observable<ResponseMovies> selectAllMoviesPage(String page, String typeMovie);
-
-    /**
-     * Insert data movies.
-     *
-     * @param responseMovies the response movies
-     * @param typeMoves      the type moves
-     * @return the long
-     */
-    Long insertDataMovies(ResponseMovies responseMovies, String typeMoves);
+    Observable<ResponseDataMovies> selectAllMoviesPageA(String page, String typeMovie);
 }

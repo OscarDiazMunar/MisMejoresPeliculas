@@ -1,6 +1,6 @@
 package com.oscar.mismejorespeliculas.presentation.presenter.videoDialogPresenter;
 
-import com.oscar.mismejorespeliculas.domain.model.Videos;
+import com.oscar.mismejorespeliculas.domain.model.api.Videos;
 import com.oscar.mismejorespeliculas.domain.usecase.UseCaseObserver;
 import com.oscar.mismejorespeliculas.domain.usecase.listMovies.GetListMovies;
 import com.oscar.mismejorespeliculas.presentation.presenter.Presenter;
